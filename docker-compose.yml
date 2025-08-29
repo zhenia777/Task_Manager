@@ -1,0 +1,21 @@
+version: '3.8'
+
+networks: 
+  default:
+    name: 'task_manager'
+
+volumes:
+  task-manager-pg:
+
+services:
+  postgres:
+    container_name: 'task-manager-pg'
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432' 
+    environment:
+      POSTGRES_PASSWORD: 'postgrespw'
+    volumes:
+      - 'task-manager-pg:/var/lib/postgresql/data'
+
+
