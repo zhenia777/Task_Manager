@@ -1,5 +1,13 @@
-﻿namespace Storage.Mapping;
+﻿using AutoMapper;
+using Domain.UseCases.TaskOperations.Models;
+using Storage.Entities;
 
-internal class TaskProfile
+namespace Storage.Mapping;
+
+public class TaskProfile : Profile
 {
+    public TaskProfile()
+    {
+        CreateMap<TaskEntity, TaskModel>().ReverseMap();
+    }
 }

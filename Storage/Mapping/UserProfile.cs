@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Storage.Entities;
 
-namespace Storage.Mapping
+namespace Storage.Mapping;
+
+public class UserProfile : Profile
 {
-    internal class UserProfile
+    public UserProfile()
     {
+        CreateMap<UserEntity, UserProfile>().ReverseMap();
     }
 }

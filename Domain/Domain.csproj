@@ -13,10 +13,5 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="UseCases\TaskOperations\Command\" />
-    <Folder Include="UseCases\TaskOperations\Queries\" />
-  </ItemGroup>
 
 </Project>
