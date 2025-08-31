@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Domain.UseCases.TaskOperations.Queries.GetAllTasks;
 
-public record class GetTasksQuery : PaginationQuery, IRequest<PaginationList<TaskModel>>
+public record class GetTasksQuery(Guid UserId) : PaginationQuery, IRequest<PaginationList<TaskModel>>
 {
     public int? Status { get; set; }
 

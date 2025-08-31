@@ -23,7 +23,7 @@ public class LoginCommandHandler(ITokenService tokenService,
         return new UserLoginResultModel
         {
             Token = _tokenService.CreateToken(userId),
-            UserName = request.Email
+            Email = request.Email,
         };
     }
 }

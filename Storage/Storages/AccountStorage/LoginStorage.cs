@@ -8,11 +8,13 @@ public class LoginStorage(TaskManagerDbContext dbContext) : ILoginStorage
 {
     private readonly TaskManagerDbContext _dbContext = dbContext;
 
-    public async Task<bool> CheckPassword(string email, string password, CancellationToken cancellationToken)
+    public async Task<bool> CheckPassword(string email, string password, 
+                                          CancellationToken cancellationToken)
     {
         var user = await dbContext.Users
                                   .AsNoTracking()
-                                  .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+                                  .FirstOrDefaultAsync(u => u.Email == email, 
+                                                       cancellationToken);
         if (user == null)
         {
             throw new DomainException(ErrorDomainStatus.NotFound, $"User with: {email} not found!");

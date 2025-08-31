@@ -13,7 +13,7 @@ public class GetTasksStorage(TaskManagerDbContext dbContext, IMapper mapper) : I
 
     public IQueryable<TaskModel> GetAll(GetTasksQuery query)
     {
-        var tasks = _dbContext.Tasks.AsNoTracking();
+        var tasks = _dbContext.Tasks.AsNoTracking().Where(t => t.UserId == query.UserId);
 
         if (query.Status != null)
         {
