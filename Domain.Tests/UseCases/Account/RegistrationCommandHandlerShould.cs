@@ -29,16 +29,16 @@ public class RegistrationCommandHandlerShould
             .Setup(s => s.IsUserExist(command.Email, It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
-        registrationStorageMock
-            .Setup(s => s.CreateUser(command.UserName, command.Email, command.Password, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask);
+        var registerSeup = registrationStorageMock
+            .Setup(s => s.CreateUser(command.Email, command.UserName, command.Password, It.IsAny<CancellationToken>()));
+        registerSeup.Returns(Task.CompletedTask);
 
         await sut.Handle(command, CancellationToken.None);
 
         loginStorageMock.Verify(s => s.IsUserExist(command.Email, It.IsAny<CancellationToken>()), Times.Once());
         loginStorageMock.VerifyNoOtherCalls();
 
-        registrationStorageMock.Verify(s => s.CreateUser(command.UserName, command.Email, command.Password, 
+        registrationStorageMock.Verify(s => s.CreateUser(command.Email, command.UserName, command.Password, 
                                                          It.IsAny<CancellationToken>()), Times.Once());
         registrationStorageMock.VerifyNoOtherCalls();
     }
@@ -54,7 +54,7 @@ public class RegistrationCommandHandlerShould
 
         await sut.Invoking(s => s.Handle(command, CancellationToken.None))
                  .Should().ThrowAsync<DomainException>()
-                 .WithMessage("User with this email or username already exist.");
+                 .WithMessage("Email is exists!");
 
         loginStorageMock.Verify(s => s.IsUserExist(command.Email, It.IsAny<CancellationToken>()), Times.Once());
         loginStorageMock.VerifyNoOtherCalls();
